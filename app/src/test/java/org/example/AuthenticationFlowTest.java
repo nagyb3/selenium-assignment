@@ -66,7 +66,7 @@ public class AuthenticationFlowTest extends BasePage {
 
     @Test(dependsOnMethods = {"loginTest"})
     public void testVerifyCookie() {
-        driver.get("https://www.sharelane.com/cgi-bin/main.py");
+        driver.get(baseUrl);
         Cookie cookie = driver.manage().getCookieNamed("email");
 
         assertNotNull(cookie, "Cookie 'email' not found!");
