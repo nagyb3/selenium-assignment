@@ -6,6 +6,6 @@ public class StaticHomepageTest extends BasePage {
     @Test
     public void testStaticHomepage() {
         driver.get(baseUrl);
-        // TODO
+        // TODO 
     }
 }
