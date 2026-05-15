@@ -17,6 +17,7 @@ public class BasePage {
     public WebDriver driver;
     public String baseUrl;
     public Properties properties;
+    public String remoteWebDriverUrl;
 
     @BeforeClass
     @Parameters({"browser"})
@@ -26,20 +27,21 @@ public class BasePage {
         InputStream stream = loader.getResourceAsStream("config.properties");
         properties.load(stream);
         baseUrl = properties.get("baseUrl").toString();
+        remoteWebDriverUrl = properties.getProperty("remoteWebDriverUrl");
 
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless=new");
                 options.addArguments("--window-size=1920,1080");
-                this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+                this.driver = new RemoteWebDriver(new URL(remoteWebDriverUrl), options);
                 break;
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--width=1920");
                 firefoxOptions.addArguments("--height=1080");
-                this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
+                this.driver = new RemoteWebDriver(new URL(remoteWebDriverUrl), firefoxOptions);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browser);

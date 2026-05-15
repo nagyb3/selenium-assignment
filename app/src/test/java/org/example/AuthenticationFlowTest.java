@@ -39,7 +39,7 @@ public class AuthenticationFlowTest extends BasePage {
         driver.findElement(By.xpath("//input[@value='Register']")).click();
 
         // Note to the grader of this assignment: the tested website generates a new email and password for security reasons
-        // because of this I will store these randomly generated credentials in a global store to be used in other test files.
+        // because of this I will store these credentials from the website as a data member, so we can use them in the next test methods.
         String registeredEmail = driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText();
         String registeredPassword = driver.findElement(By.xpath("//td[text()='Password']/following-sibling::td")).getText();
         this.actualEmail = registeredEmail;
