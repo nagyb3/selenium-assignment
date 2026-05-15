@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.utils.GlobalStore;
 import org.example.utils.RandomEmailAndPasswordGenerator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -14,6 +13,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 public class AuthenticationFlowTest extends BasePage {
+    private String actualEmail;
+    private String actualPassword;
 
     @Test
     void registerNewUser() {
@@ -41,8 +42,8 @@ public class AuthenticationFlowTest extends BasePage {
         // because of this I will store these randomly generated credentials in a global store to be used in other test files.
         String registeredEmail = driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText();
         String registeredPassword = driver.findElement(By.xpath("//td[text()='Password']/following-sibling::td")).getText();
-        GlobalStore.actualEmail = registeredEmail;
-        GlobalStore.actualPassword = registeredPassword;
+        this.actualEmail = registeredEmail;
+        this.actualPassword = registeredPassword;
     }
 
     @Test(dependsOnMethods = {"registerNewUser"})
@@ -50,10 +51,10 @@ public class AuthenticationFlowTest extends BasePage {
         driver.get(baseUrl);
 
         WebElement emailInput = driver.findElement(By.xpath("//input[@name='email']"));
-        emailInput.sendKeys(GlobalStore.actualEmail);
+        emailInput.sendKeys(this.actualEmail);
 
         WebElement passwordInput = driver.findElement(By.xpath("//input[@name='password']"));
-        passwordInput.sendKeys(GlobalStore.actualPassword);
+        passwordInput.sendKeys(this.actualPassword);
 
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
@@ -75,7 +76,7 @@ public class AuthenticationFlowTest extends BasePage {
 
         String sanitizedValue = rawCookieValue.replace("\"", "");
 
-        assertEquals(sanitizedValue, GlobalStore.actualEmail);
+        assertEquals(sanitizedValue, this.actualEmail);
     }
 
     @Test(dependsOnMethods = {"testVerifyCookie"})
