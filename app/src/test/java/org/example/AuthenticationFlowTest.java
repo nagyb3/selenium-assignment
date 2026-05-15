@@ -16,7 +16,7 @@ import static org.testng.Assert.assertNotNull;
 public class AuthenticationFlowTest extends BasePage {
 
     @Test
-    void reigsterNewUser() {
+    void registerNewUser() {
         RandomEmailAndPasswordGenerator generator = new RandomEmailAndPasswordGenerator();
         String newEmail = generator.generateRandomEmail();
         String newPassword = generator.generateRandomPassword();
@@ -45,7 +45,7 @@ public class AuthenticationFlowTest extends BasePage {
         GlobalStore.actualPassword = registeredPassword;
     }
 
-    @Test(dependsOnMethods = {"reigsterNewUser"})
+    @Test(dependsOnMethods = {"registerNewUser"})
     void loginTest() {
         driver.get(baseUrl);
 

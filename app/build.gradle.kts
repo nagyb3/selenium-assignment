@@ -19,6 +19,7 @@ dependencies {
     testImplementation(libs.testng)
     testImplementation("org.seleniumhq.selenium:selenium-java:2.52.0")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-firefox-driver:3.141.59")
 
     // This dependency is used by the application.
     implementation(libs.guava)
@@ -37,7 +38,11 @@ application {
 }
 
 tasks.test {
-    useTestNG()
+    useTestNG {
+        suites(
+            "src/test/resources/testng.xml"
+        )
+    }
     testLogging {
         showStandardStreams=true
         events("passed", "skipped", "failed", "standardOut", "standardError")

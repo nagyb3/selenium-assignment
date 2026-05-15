@@ -1,0 +1,24 @@
+<suite name="CrossBrowserTestSuite">
+    <test name="Chrome Browser Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.example.AuthenticationFlowTest"/>
+            <class name="org.example.PageTitleTest"/>
+            <class name="org.example.BrowserHistoryTest"/>
+            <class name="org.example.MultiplePageTest"/>
+            <class name="org.example.ScreenshotOnTestFailure"/>
+            <class name="org.example.StaticHomepageTest"/>
+        </classes>
+    </test>
+    <test name="Firefox Browser Tests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="org.example.AuthenticationFlowTest"/>
+            <class name="org.example.PageTitleTest"/>
+            <class name="org.example.BrowserHistoryTest"/>
+            <class name="org.example.MultiplePageTest"/>
+            <class name="org.example.ScreenshotOnTestFailure"/>
+            <class name="org.example.StaticHomepageTest"/>
+        </classes>
+    </test>
+</suite>

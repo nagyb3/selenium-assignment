@@ -2,7 +2,9 @@ package org.example;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Parameters;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,17 +19,31 @@ public class BasePage {
     public Properties properties;
 
     @BeforeClass
-    public void setUp() throws IOException {
+    @Parameters({"browser"})
+    public void setUp(@Optional("chrome") String browser) throws IOException {
         properties = new Properties();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream stream = loader.getResourceAsStream("config.properties");
         properties.load(stream);
         baseUrl = properties.get("baseUrl").toString();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
-        options.addArguments("--window-size=1920,1080");
-        this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+                this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+                break;
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless");
+                firefoxOptions.addArguments("--width=1920");
+                firefoxOptions.addArguments("--height=1080");
+                this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
         this.driver.manage().window().maximize();
     }
 
