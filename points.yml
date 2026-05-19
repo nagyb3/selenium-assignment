@@ -73,7 +73,7 @@ basic:
     description: "Submit a form (each distinct form counts as one)"
 
   static_page_test:          # 2 pts | once
-    done: false  # TODO
+    done: true
     description: "Test a static page (verify text content, element presence, etc.)"
 
   multiple_page_test:        # 3 pts | once
@@ -207,6 +207,6 @@ advanced:
     link: "https://www.selenium.dev/documentation/webdriver/browsers/"
 
   dockerized_execution:      # 4 pts | once
-    done: false # TODO
+    done: false
     description: "Run tests inside a Docker container (e.g. using docker-compose with Selenium Grid)"
     link: "https://www.selenium.dev/documentation/grid/getting_started/"
