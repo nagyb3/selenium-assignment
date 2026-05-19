@@ -16,6 +16,7 @@ import org.testng.annotations.*;
 public class BasePage {
     public WebDriver driver;
     public String baseUrl;
+    public String homePageUrl;
     public Properties properties;
     public String remoteWebDriverUrl;
 
@@ -27,6 +28,7 @@ public class BasePage {
         InputStream stream = loader.getResourceAsStream("config.properties");
         properties.load(stream);
         baseUrl = properties.get("baseUrl").toString();
+        homePageUrl = properties.get("homePageUrl").toString();
         remoteWebDriverUrl = properties.getProperty("remoteWebDriverUrl");
 
         switch (browser.toLowerCase()) {

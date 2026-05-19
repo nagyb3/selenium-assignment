@@ -17,11 +17,11 @@ public class AuthenticationFlowTest extends BasePage {
     private String actualPassword;
 
     @Test
-    void registerNewUser() {
+    void shouldRegisterNewUserSuccessfully() {
         RandomEmailAndPasswordGenerator generator = new RandomEmailAndPasswordGenerator();
         String newEmail = generator.generateRandomEmail();
         String newPassword = generator.generateRandomPassword();
-        driver.get(baseUrl);
+        driver.get(homePageUrl);
         driver.findElement(By.linkText("Sign up")).click();
 
         WebElement zipCodeInput = driver.findElement(By.xpath("//input[@name='zip_code']"));
@@ -46,9 +46,9 @@ public class AuthenticationFlowTest extends BasePage {
         this.actualPassword = registeredPassword;
     }
 
-    @Test(dependsOnMethods = {"registerNewUser"})
-    void loginTest() {
-        driver.get(baseUrl);
+    @Test(dependsOnMethods = {"shouldRegisterNewUserSuccessfully"})
+    void shouldLoginWithARegisteredUserSuccessfully() {
+        driver.get(homePageUrl);
 
         WebElement emailInput = driver.findElement(By.xpath("//input[@name='email']"));
         emailInput.sendKeys(this.actualEmail);
@@ -65,9 +65,9 @@ public class AuthenticationFlowTest extends BasePage {
     }
 
 
-    @Test(dependsOnMethods = {"loginTest"})
-    public void testVerifyCookie() {
-        driver.get(baseUrl);
+    @Test(dependsOnMethods = {"shouldLoginWithARegisteredUserSuccessfully"})
+    public void shouldStoreCookiesAfterLogin() {
+        driver.get(homePageUrl);
         Cookie cookie = driver.manage().getCookieNamed("email");
 
         assertNotNull(cookie, "Cookie 'email' not found!");
@@ -79,9 +79,9 @@ public class AuthenticationFlowTest extends BasePage {
         assertEquals(sanitizedValue, this.actualEmail);
     }
 
-    @Test(dependsOnMethods = {"testVerifyCookie"})
-    void logoutTest() {
-        driver.get(baseUrl);
+    @Test(dependsOnMethods = {"shouldStoreCookiesAfterLogin"})
+    void shouldLogoutSuccessfully() {
+        driver.get(homePageUrl);
         driver.findElement(By.linkText("Logout")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);

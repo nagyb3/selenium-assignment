@@ -1,4 +1,8 @@
 <suite name="CrossBrowserTestSuite">
+    <listeners>
+        <listener class-name="org.example.utils.TestFailureListeners" />
+    </listeners>
+
     <test name="Chrome Browser Tests">
         <parameter name="browser" value="chrome"/>
         <classes>
@@ -6,7 +10,6 @@
             <class name="org.example.PageTitleTest"/>
             <class name="org.example.BrowserHistoryTest"/>
             <class name="org.example.MultiplePageTest"/>
-            <class name="org.example.ScreenshotOnTestFailure"/>
             <class name="org.example.StaticHomepageTest"/>
         </classes>
     </test>
@@ -17,7 +20,6 @@
             <class name="org.example.PageTitleTest"/>
             <class name="org.example.BrowserHistoryTest"/>
             <class name="org.example.MultiplePageTest"/>
-            <class name="org.example.ScreenshotOnTestFailure"/>
             <class name="org.example.StaticHomepageTest"/>
         </classes>
     </test>

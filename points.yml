@@ -77,11 +77,11 @@ basic:
     description: "Test a static page (verify text content, element presence, etc.)"
 
   multiple_page_test:        # 3 pts | once
-    done: false  # TODO
+    done: true
     description: "Define an array of URLs or page data, iterate over them and verify something on each page (e.g. check title or a specific element on 5 different pages using a loop)"
 
   complex_xpath:             # 1 pt each | repeatable | max 10
-    count: 4
+    count: 5
     description: "Use a complex XPath expression (e.g. //div[@class='content']//a[contains(@href,'profile')])"
 
   textarea:                  # 1 pt | once
@@ -128,7 +128,7 @@ basic:
     description: "Create a BasePage class that other page classes extend"
 
   readable_tests:            # 3 pts | once
-    done: false  # TODO
+    done: true
     description: "Test methods have descriptive names so the suite reads like a test specification"
 
 # ----------------------------------------------------------
@@ -192,7 +192,7 @@ advanced:
     link: "https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html"
     
   screenshot_on_failure:     # 6 pts | once
-    done: false  # TODO
+    done: true
     description: "Automatically take a screenshot when a test fails (e.g. using a TestNG ITestListener)"
     link: "https://www.browserstack.com/guide/take-screenshots-in-selenium"
     
@@ -210,4 +210,3 @@ advanced:
     done: false # TODO
     description: "Run tests inside a Docker container (e.g. using docker-compose with Selenium Grid)"
     link: "https://www.selenium.dev/documentation/grid/getting_started/"
-
